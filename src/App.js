@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import { useDispatch, useSelector } from 'react-redux'
-import Header from './Header'
-import Sidebar from './Sidebar';
-import Login from './Login'
-import Feed from './Feed';
-import { login, logout, selectUser } from './features/userSlice';
+import { useDispatch } from 'react-redux'
+import Login from './components/Login'
+import { login, logout } from './features/userSlice';
 import { auth } from './firebase';
-import Widgets from './Widgets';
 
 function App() {
 
-  const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
@@ -36,16 +31,13 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      {!user ? (<Login />) :
-        (
-          /* App Body */
-          < div className='app__body'>
-            <Sidebar />
-            <Feed />
-            <Widgets />
-          </div>)
-      }
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

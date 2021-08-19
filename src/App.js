@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import Login from './components/Login'
 import { login, logout } from './features/userSlice';
 import { auth } from './firebase';
+import Home from './components/Home';
 
 function App() {
 
@@ -35,6 +36,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Login />
+          </Route>
+          <Route path='/home'>
+            <Home />
           </Route>
         </Switch>
       </Router>

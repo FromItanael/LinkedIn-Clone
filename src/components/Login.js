@@ -1,11 +1,15 @@
-import React from 'react'
 import styled from "styled-components"
 import { connect } from 'react-redux'
 import { signInAPI } from '../actions'
+import { Redirect } from 'react-router'
 
 function Login(props) {
     return (
         <Container>
+            {
+                props.user &&
+                <Redirect to="/home" />
+            }
             <Nav>
                 <a href="/">
                     <img src="/images/login-logo.svg" alt="" />
@@ -52,7 +56,7 @@ const Nav = styled.nav`
             padding:0 5px;
         }
     }
-`
+`;
 
 const Join = styled.a`
     font-size: 16px;
@@ -71,7 +75,7 @@ const Join = styled.a`
         color: rgba(0,0,0,0.9);
         text-decoration:none;
     }
-`
+`;
 const SignIn = styled.a`
     box-shadow:inset 0 0 0 1px #0a66c2;
     color: #0a66c2;
@@ -90,7 +94,7 @@ const SignIn = styled.a`
         text-decoration: none;
         box-shadow: inset 0 0 0 2px #0a66c2;
     }
-`
+`;
 
 const Section = styled.section`
     display:flex;
@@ -110,7 +114,7 @@ const Section = styled.section`
         margin:auto;
         min-height:0px;
     }
-`
+`;
 const Hero = styled.div`
     width:100%;
     h1 {
@@ -142,7 +146,7 @@ const Hero = styled.div`
             height:initial;
         }
     }
-`
+`;
 
 const Form = styled.div`
     margin-top:100px;
@@ -151,7 +155,7 @@ const Form = styled.div`
     @media(max-width:768px){
         margin-top:20px;
     }
-`
+`;
 
 const Google = styled.button`
     display:flex;
@@ -172,14 +176,16 @@ const Google = styled.button`
         background-color: rgba(207,207,207,0.25);
         color: rgba(0, 0, 0, 0.75);
     }
-`
+`;
 
 const mapStateToProps = (state) => {
-    return {}
-}
+    return {
+        user: state.userState.user,
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     signIn: () => dispatch(signInAPI()),
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

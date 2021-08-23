@@ -1,34 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import { useDispatch } from 'react-redux'
 import Login from './components/Login'
-import { login, logout } from './features/userSlice';
-import { auth } from './firebase';
 import Home from './components/Home';
+import { getUserAuth } from './actions';
 
-function App() {
-
-  const dispatch = useDispatch();
+function App(props) {
 
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
-      if (userAuth) {
-        //user is logged in
-        dispatch(
-          login({
-            email: userAuth.email,
-            uid: userAuth.uid,
-            displayName: userAuth.displayName,
-            photoUrl: userAuth.photoURL,
-          })
-        );
-      } else {
-        //user is logged out
-        dispatch(logout());
-      }
-    });
-  }, [dispatch]);
+    props.getUserAuth();
+  }, []);
 
   return (
     <div className="App">
@@ -46,4 +29,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  getUserAuth: () => dispatch(getUserAuth()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

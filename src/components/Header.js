@@ -7,18 +7,9 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { useDispatch } from "react-redux";
-import { auth } from "../firebase"
-import { logout } from '../features/userSlice';
+import { connect } from 'react-redux';
 
-function Header() {
-
-    const dispatch = useDispatch();
-    const logoutOfApp = () => {
-        dispatch(logout())
-        auth.signOut();
-    }
-
+function Header(props) {
     return (
 
         <div className='header'>
@@ -39,11 +30,17 @@ function Header() {
                 <HeaderOption
                     avatar={true}
                     title='Me'
-                    onClick={logoutOfApp}
                 />
             </div>
         </div>
     )
 }
 
-export default Header
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userState.user,
+    }
+}
+
+export default connect(mapStateToProps)(Header)

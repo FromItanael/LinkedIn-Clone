@@ -1,19 +1,35 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import './HeaderOption.css'
-import { Avatar } from '@material-ui/core'
-import { selectUser } from '../features/userSlice'
-import { useSelector } from 'react-redux'
 
-function HeaderOption({ avatar, Icon, title, onClick }) {
+function HeaderOption({ user, avatar, Icon, title }) {
 
-    const user = useSelector(selectUser)
+    const Img = () => {
+        if (user && user.photoURL) {
+            return <img src={user.photoURL}
+                className='headerOption__icon' alt="" />
+        } else {
+            return <img src="/images/user.svg"
+                className='headerOption__icon' alt="" />
+        }
+    }
+
     return (
-        <div onClick={onClick} className='headerOption'>
+        <div
+            //onClick={onClick}
+            className='headerOption'>
             {Icon && <Icon className='headerOption__icon' />}
-            {avatar && <Avatar className='headerOption__icon' src={user?.photoUrl}>{user?.email[0]}</Avatar>}
+            {avatar && <Img />}
             <h3 className='headerOption__title'>{title}</h3>
         </div >
     )
 }
 
-export default HeaderOption
+const mapStateToProps = (state) => {
+    return {
+        user: state.userState.user,
+    }
+}
+
+
+export default connect(mapStateToProps)(HeaderOption)

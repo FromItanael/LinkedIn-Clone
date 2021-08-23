@@ -9,15 +9,11 @@ import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import Post from './Post';
 import { db } from '../firebase'
 import firebase from 'firebase'
-import { useSelector } from 'react-redux';
-import { selectUser } from '../features/userSlice';
 import FlipMove from 'react-flip-move';
 
 function Feed() {
     const [input, setInput] = useState("");
     const [posts, setPosts] = useState([]);
-
-    const user = useSelector(selectUser)
 
     useEffect(() => {
         db.collection("posts").orderBy("timestamp", "desc").onSnapshot(snapshot =>
@@ -33,17 +29,17 @@ function Feed() {
         setInput(e.target.value)
     }
 
-    const sendPost = (e) => {
-        e.preventDefault();
-        db.collection('posts').add({
-            name: user.displayName,
-            description: 'this is a test',
-            message: input,
-            photoUrl: user.photoUrl || "",
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        setInput("");
-    };
+    // const sendPost = (e) => {
+    //     e.preventDefault();
+    //     db.collection('posts').add({
+    //         name: user.displayName,
+    //         description: 'this is a test',
+    //         message: input,
+    //         photoUrl: user.photoUrl || "",
+    //         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //     })
+    //     setInput("");
+    // };
 
     return (
         <div className="feed">
@@ -52,7 +48,9 @@ function Feed() {
                     <CreateIcon />
                     <form >
                         <input value={input} type="text" onChange={handleChange} />
-                        <button onClick={sendPost} type="submit">Send</button>
+                        <button
+                            //onClick={sendPost}
+                            type="submit">Send</button>
                     </form>
                 </div>
                 <div className="feed__InputOptions">

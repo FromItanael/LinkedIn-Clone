@@ -1,21 +1,22 @@
-import Widgets from './Widgets'
 import styled from "styled-components"
 import React from 'react'
-import Header from './Header'
+
 import Feed from './Feed'
 import Sidebar from './Sidebar'
+import Widgets from './Widgets'
+
+import { Redirect } from "react-router-dom"
 import { connect } from 'react-redux'
 
-function Home() {
+function Home(props) {
+
     return (
-        <div>
-            <Header />
-            <Container >
-                <Sidebar />
-                <Feed />
-                <Widgets />
-            </Container>
-        </div>
+        <Container >
+            {!props.user && <Redirect to='/' />}
+            <Sidebar />
+            <Feed />
+            <Widgets />
+        </Container>
     )
 }
 
@@ -24,9 +25,11 @@ display:flex;
 max-width:1128px;
 margin:auto;
 `
+
 const mapStateToProps = (state) => {
     return {
         user: state.userState.user,
-    }
+    };
 }
+
 export default connect(mapStateToProps)(Home)

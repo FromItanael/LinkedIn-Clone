@@ -6,6 +6,7 @@ import './App.css';
 import Login from './components/Login'
 import Home from './components/Home';
 import { getUserAuth } from './actions';
+import Header from './components/Header';
 
 function App(props) {
 
@@ -21,6 +22,7 @@ function App(props) {
             <Login />
           </Route>
           <Route path='/home'>
+            <Header />
             <Home />
           </Route>
         </Switch>

@@ -7,9 +7,8 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { connect } from 'react-redux';
 
-function Header(props) {
+function Header() {
     return (
 
         <div className='header'>
@@ -37,10 +36,4 @@ function Header(props) {
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        user: state.userState.user,
-    }
-}
-
-export default connect(mapStateToProps)(Header)
+export default Header

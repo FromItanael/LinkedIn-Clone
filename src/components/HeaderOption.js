@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { signOutAPI } from '../actions'
 import './HeaderOption.css'
 
-function HeaderOption({ user, avatar, Icon, title }) {
+function HeaderOption(props) {
 
     const Img = () => {
-        if (user && user.photoURL) {
-            return <img src={user.photoURL}
+        if (props.user && props.user.photoURL) {
+            return <img src={props.user.photoURL}
                 className='headerOption__icon' alt="" />
         } else {
             return <img src="/images/user.svg"
@@ -16,20 +17,22 @@ function HeaderOption({ user, avatar, Icon, title }) {
 
     return (
         <div
-            //onClick={onClick}
+            onClick={() => props.signOutAPI()}
             className='headerOption'>
-            {Icon && <Icon className='headerOption__icon' />}
-            {avatar && <Img />}
-            <h3 className='headerOption__title'>{title}</h3>
+            {props.Icon && <props.Icon className='headerOption__icon' />}
+            {props.avatar && <Img />}
+            <h3 className='headerOption__title'>{props.title}</h3>
         </div >
     )
 }
-
 const mapStateToProps = (state) => {
     return {
         user: state.userState.user,
     }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+    signOutAPI: () => dispatch(signOutAPI()),
+})
 
-export default connect(mapStateToProps)(HeaderOption)
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderOption)

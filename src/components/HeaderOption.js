@@ -8,7 +8,7 @@ function HeaderOption(props) {
     const Img = () => {
         if (props.user && props.user.photoURL) {
             return <img src={props.user.photoURL}
-                className='headerOption__icon' alt="" />
+                className='headerOption__icon rounded' alt="" />
         } else {
             return <img src="/images/user.svg"
                 className='headerOption__icon' alt="" />
@@ -17,7 +17,7 @@ function HeaderOption(props) {
 
     return (
         <div
-            onClick={() => props.signOutAPI()}
+            onClick={props.onClick}
             className='headerOption'>
             {props.Icon && <props.Icon className='headerOption__icon' />}
             {props.avatar && <Img />}
@@ -25,6 +25,7 @@ function HeaderOption(props) {
         </div >
     )
 }
+
 const mapStateToProps = (state) => {
     return {
         user: state.userState.user,

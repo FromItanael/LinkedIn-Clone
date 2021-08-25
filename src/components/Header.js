@@ -8,7 +8,10 @@ import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-function Header() {
+import { signOutAPI } from '../actions';
+import { connect } from 'react-redux';
+
+function Header(props) {
     return (
 
         <div className='header'>
@@ -27,6 +30,7 @@ function Header() {
                 <HeaderOption Icon={ChatIcon} title='Messaging' />
                 <HeaderOption Icon={NotificationsIcon} title='Notifications' />
                 <HeaderOption
+                    onClick={() => props.signOutAPI()}
                     avatar={true}
                     title='Me'
                 />
@@ -35,5 +39,15 @@ function Header() {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.userState.user,
+    }
+}
 
-export default Header
+const mapDispatchToProps = (dispatch) => ({
+    signOutAPI: () => dispatch(signOutAPI()),
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

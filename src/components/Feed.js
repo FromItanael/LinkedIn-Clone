@@ -10,8 +10,9 @@ import Post from './Post';
 import { db } from '../firebase'
 import firebase from 'firebase'
 import FlipMove from 'react-flip-move';
+import { connect } from 'react-redux';
 
-function Feed() {
+function Feed(props) {
     const [input, setInput] = useState("");
     const [posts, setPosts] = useState([]);
 
@@ -29,17 +30,17 @@ function Feed() {
         setInput(e.target.value)
     }
 
-    // const sendPost = (e) => {
-    //     e.preventDefault();
-    //     db.collection('posts').add({
-    //         name: user.displayName,
-    //         description: 'this is a test',
-    //         message: input,
-    //         photoUrl: user.photoUrl || "",
-    //         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //     })
-    //     setInput("");
-    // };
+    const sendPost = (e) => {
+        e.preventDefault();
+        db.collection('posts').add({
+            name: props.user.displayName,
+            description: 'this is a test',
+            message: input,
+            photoUrl: props.user.photoURL || "",
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        setInput("");
+    };
 
     return (
         <div className="feed">
@@ -49,7 +50,7 @@ function Feed() {
                     <form >
                         <input value={input} type="text" onChange={handleChange} />
                         <button
-                            //onClick={sendPost}
+                            onClick={sendPost}
                             type="submit">Send</button>
                     </form>
                 </div>
@@ -77,4 +78,15 @@ function Feed() {
     );
 }
 
-export default Feed
+const mapStateToProps = (state) => {
+    return {
+        user: state.userState.user,
+    }
+}
+
+// const mapDispatchToProps = (dispatch) => ({
+//     signOutAPI: () => dispatch(signOutAPI()),
+// })
+
+
+export default connect(mapStateToProps)(Feed)

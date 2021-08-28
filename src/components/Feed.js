@@ -11,6 +11,8 @@ import { db } from '../firebase'
 import firebase from 'firebase'
 import FlipMove from 'react-flip-move';
 import { connect } from 'react-redux';
+import { Avatar } from '@material-ui/core';
+import PostModal from './PostModal';
 
 function Feed(props) {
     const [input, setInput] = useState("");
@@ -45,14 +47,17 @@ function Feed(props) {
     return (
         <div className="feed">
             <div className="feed__inputContainer">
-                <div className="feed__input">
-                    <CreateIcon />
-                    <form >
-                        <input value={input} type="text" onChange={handleChange} />
-                        <button
-                            onClick={sendPost}
-                            type="submit">Send</button>
-                    </form>
+                <div className="feed__inputLine">
+                    {props.user.photoURL ? <Avatar src={props.user.photoURL} alt="" /> : <img src="/images/user.svg" alt="" />}
+                    <div className="feed__input">
+                        <CreateIcon />
+                        <form >
+                            <input value={input} type="text" onChange={handleChange} placeholder="Commencer un post" />
+                            <button
+                                onClick={sendPost}
+                                type="submit">Send</button>
+                        </form>
+                    </div>
                 </div>
                 <div className="feed__InputOptions">
                     <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" />
@@ -60,6 +65,7 @@ function Feed(props) {
                     <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" />
                     <InputOption Icon={CalendarViewDayIcon} title="Write article" color="#7FC15E" />
                 </div>
+                <PostModal />
             </div>
 
             {/* Posts */}
@@ -83,10 +89,5 @@ const mapStateToProps = (state) => {
         user: state.userState.user,
     }
 }
-
-// const mapDispatchToProps = (dispatch) => ({
-//     signOutAPI: () => dispatch(signOutAPI()),
-// })
-
 
 export default connect(mapStateToProps)(Feed)

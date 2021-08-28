@@ -11,13 +11,19 @@
     margin-bottom: 20px;
 }
 
+.feed__inputLine {
+    display: flex;
+}
+
 .feed__input {
     border: 1px solid lightgray;
     border-radius: 30px;
     display: flex;
+    margin-left: 10px;
     padding: 10px;
     color: gray;
     padding-left: 15px;
+    width: 100%;
 }
 
 .feed__input>form {
@@ -31,6 +37,7 @@
     flex: 1;
     outline-width: 0;
     font-weight: 600;
+    font-size: 13px;
 }
 
 .feed__input>form>button {

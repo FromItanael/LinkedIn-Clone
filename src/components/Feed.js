@@ -12,19 +12,12 @@ import FlipMove from 'react-flip-move';
 import { connect } from 'react-redux';
 import { Avatar } from '@material-ui/core';
 import PostModal from './PostModal';
+import { getArticlesAPI } from "../actions"
 
 function Feed(props) {
 
-    const [posts, setPosts] = useState([]);
-
     useEffect(() => {
-        db.collection("posts").orderBy("timestamp", "desc").onSnapshot(snapshot =>
-            setPosts(snapshot.docs.map((doc) => ({
-                id: doc.id,
-                data: doc.data(),
-            }))
-            )
-        )
+        props.getArticles();
     }, [])
 
     const [showModal, setShowModal] = useState("close");
@@ -56,7 +49,9 @@ function Feed(props) {
                         <div className="feed__input">
                             <CreateIcon />
                             <form >
-                                <input onClick={handleClick} type="text" placeholder="Commencer un post" />
+                                <input onClick={handleClick}
+                                    disabled={props.loading ? true : false}
+                                    type="text" placeholder="Commencer un post" />
                             </form>
                         </div>
                     </div>
@@ -71,7 +66,8 @@ function Feed(props) {
 
                 {/* Posts */}
                 <FlipMove>
-                    {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+                    {props.loading && <div className="align-center" ><img src="/images/spin-loader.svg" alt="" /></div>}
+                    {/* {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
                         <Post
                             key={id}
                             name={name}
@@ -79,7 +75,7 @@ function Feed(props) {
                             message={message}
                             photoUrl={photoUrl}
                         />
-                    ))}
+                    ))} */}
                 </FlipMove>
             </div>
         </>
@@ -89,7 +85,12 @@ function Feed(props) {
 const mapStateToProps = (state) => {
     return {
         user: state.userState.user,
+        loading: state.articleState.loading,
     }
 }
 
-export default connect(mapStateToProps)(Feed)
+const mapDispatchToPros = (dispatch) => ({
+    getArticles: () => dispatch(getArticlesAPI()),
+})
+
+export default connect(mapStateToProps, mapDispatchToPros)(Feed)

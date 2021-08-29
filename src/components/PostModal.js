@@ -15,7 +15,6 @@ const PostModal = (props) => {
     const handleChange = (e) => {
         const image = e.target.files[0];
 
-        console.log(image)
         if (image === '' || image === undefined) {
             alert(`Ce n'est pas une image, le fichier est un ${typeof image}`);
             return;

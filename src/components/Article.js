@@ -1,26 +1,29 @@
 import { Avatar } from '@material-ui/core'
-import React, { forwardRef } from 'react'
+import React from 'react'
 import InputOption from './InputOption'
-import "./Post.css"
+import "./Article.css"
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
+import ReactPlayer from 'react-player';
 
-const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
+const Article = ({ article }) => {
 
     return (
-        <div ref={ref} className="post">
+        <div className="post">
             <div className="post__header">
-                <Avatar src={photoUrl}>{name[0]}</Avatar>
+                <Avatar src={article.actor.image}>{article.actor.title[0]}</Avatar>
                 <div className="post__info">
-                    <h2>{name}</h2>
-                    <p>{description}</p>
+                    <h2>{article.actor.title}</h2>
+                    {/* <p>{article.actor.description}</p> */}
                 </div>
             </div>
 
             <div className="post__body">
-                <p>{message}</p>
+                <p>{article.description}</p>
+                {article.video && <ReactPlayer width={'100%'} url={article.video} />}
+                {article.shareImg && <img src={article.shareImg} alt="" />}
             </div>
 
             <div className="post__buttons">
@@ -31,6 +34,6 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
             </div>
         </div>
     )
-})
+}
 
-export default Post
+export default Article

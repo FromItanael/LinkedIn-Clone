@@ -6,9 +6,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
-import Post from './Post';
-import { db } from '../firebase'
-import FlipMove from 'react-flip-move';
+import Article from './Article';
 import { connect } from 'react-redux';
 import { Avatar } from '@material-ui/core';
 import PostModal from './PostModal';
@@ -63,20 +61,21 @@ function Feed(props) {
                     </div>
                     <PostModal showModal={showModal} closeModal={handleClick} />
                 </div>
+                {props.loading && <div className="align-center" ><img src="/images/spin-loader.svg" alt="" /></div>}
 
-                {/* Posts */}
-                <FlipMove>
-                    {props.loading && <div className="align-center" ><img src="/images/spin-loader.svg" alt="" /></div>}
-                    {/* {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
-                        <Post
-                            key={id}
-                            name={name}
-                            description={description}
-                            message={message}
-                            photoUrl={photoUrl}
-                        />
-                    ))} */}
-                </FlipMove>
+                {/* Articles */}
+                {props.articles.length === 0 ?
+                    <p>Il n'y a pas d'article</p>
+                    :
+                    <>
+                        {props.articles.map((article, key) => (
+                            <Article key={key}
+                                article={article}
+                            />
+
+                        ))}
+                    </>
+                }
             </div>
         </>
     );
@@ -86,6 +85,7 @@ const mapStateToProps = (state) => {
     return {
         user: state.userState.user,
         loading: state.articleState.loading,
+        articles: state.articleState.articles,
     }
 }
 

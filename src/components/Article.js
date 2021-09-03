@@ -1,11 +1,6 @@
 import { Avatar } from '@material-ui/core'
 import React from 'react'
-import InputOption from './InputOption'
 import "./Article.css"
-import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
-import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
-import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 import ReactPlayer from 'react-player';
 
 const Article = ({ article }) => {
@@ -22,15 +17,26 @@ const Article = ({ article }) => {
 
             <div className="post__body">
                 <p>{article.description}</p>
-                {article.video && <ReactPlayer width={'100%'} url={article.video} />}
-                {article.shareImg && <img src={article.shareImg} alt="" />}
+                {!article.shareImg && article.video ? (<ReactPlayer width={'100%'} url={article.video} />) : (article.shareImg && <img src={article.shareImg} alt="" />)}
             </div>
 
             <div className="post__buttons">
-                <InputOption Icon={ThumbUpOutlinedIcon} title='Like' color='gray' />
-                <InputOption Icon={ChatOutlinedIcon} title='Comment' color='gray' />
-                <InputOption Icon={ShareOutlinedIcon} title='Share' color='gray' />
-                <InputOption Icon={SendOutlinedIcon} title='Send' color='gray' />
+                <div className="inputOption">
+                    <img src="/images/like-icon.svg" alt="" />
+                    <h4>J'aime</h4>
+                </div>
+                <div className="inputOption">
+                    <img src="/images/speech-bubble-icon.svg" alt="" />
+                    <h4>Commenter</h4>
+                </div>
+                <div className="inputOption">
+                    <img src="/images/share-linkedin-icon.svg" alt="" />
+                    <h4>Partager</h4>
+                </div>
+                <div className="inputOption">
+                    <img src="/images/send-privately-icon.svg" alt="" />
+                    <h4>Envoyer</h4>
+                </div>
             </div>
         </div>
     )

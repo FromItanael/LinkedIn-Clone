@@ -16,7 +16,7 @@ function Header(props) {
 
         <div className='header'>
             <div className="header__left">
-                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174857.svg" alt="Logo" />
+                <img src="/images/linkedin-logo.svg" alt="Logo" />
                 <div className="header__search">
                     <SearchIcon />
                     <input type="text" placeholder="Search" />
@@ -32,7 +32,7 @@ function Header(props) {
                 <HeaderOption
                     onClick={() => props.signOutAPI()}
                     avatar={true}
-                    title='Me'
+                    title={props.user.displayName}
                 />
             </div>
         </div>

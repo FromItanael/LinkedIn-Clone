@@ -29,5 +29,140 @@
 
 .post__buttons {
     display: flex;
+    position: relative;
     font-size: 0.8rem;
+}
+
+.dnone {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.likeOptions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    width: 290px;
+    height: 50px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 300px;
+    position: absolute;
+    top: -35px;
+    left: -15px;
+    z-index: 9999;
+    background-color: white;
+}
+
+.reactions-menu__reaction {
+    position: relative
+}
+
+.likeOptions .reactions-menu__reaction .reactions-menu__reaction-description {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity .3s;
+    border-radius: 15px;
+    color: hsla(0, 0%, 100%, 0.9);
+    padding: 4px 8px;
+    white-space: nowrap;
+    position: absolute;
+    left: 50%;
+    top: -60%;
+}
+
+.reactions-menu__reaction-description {
+    transform: translateX(-50%);
+    top: -45px;
+    visibility: hidden
+}
+
+
+@keyframes reactions-bounceIconsIn {
+    0% {
+        transform: translateY(0)
+    }
+
+    10% {
+        transform: scale(1.1, .9) translateY(0)
+    }
+
+    30% {
+        transform: scale(.9, 1.05) translateY(-8px)
+    }
+
+    50% {
+        transform: scale(1.05, .95) translateY(0)
+    }
+
+    60% {
+        transform: scale(1) translateY(-2px)
+    }
+
+    to {
+        transform: scale(1) translateY(0)
+    }
+}
+
+.likeOptions .reactions-menu__reaction {
+    animation: reactions-bounceIconsIn .65s cubic-bezier(.28, .84, .42, 1) forwards;
+    transition: transform .1s;
+}
+
+.likeOptions .reactions-menu__reaction .reactions-menu__icon {
+    height: 30px;
+    width: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.reactions-menu__reaction:hover .reactions-menu__icon {
+    transform: scale(1.35) translateY(-28%);
+    transition: transform 300ms;
+}
+
+@keyframes reactions-hover {
+    0% {
+        transform: translateY(0)
+    }
+
+    to {
+        transform: scale(1.35) translateY(-28%)
+    }
+}
+.reactions-menu__reaction .reactions-menu__icon {
+    transform: translateY(0);
+    transition: transform 0.5s;
+}
+/* .reactions-menu__icon:not(:hover) {
+    transform: scale(.9) ease-in-out .5s;
+    transition: transform 300ms;
+}
+
+*/
+.likeOptions .reactions-menu__reaction:nth-of-type(2) img {
+    animation-delay: 50ms
+}
+
+.likeOptions .reactions-menu__reaction:nth-of-type(3) img {
+    animation-delay: 90ms
+}
+
+.likeOptions .reactions-menu__reaction:nth-of-type(4) img {
+    animation-delay: .13s
+}
+
+.likeOptions .reactions-menu__reaction:nth-of-type(5) img {
+    animation-delay: .17s
+}
+
+.reactions-menu__reaction:focus .reactions-menu__reaction-description,
+.reactions-menu__reaction:hover .reactions-menu__reaction-description {
+    opacity: 1;
+    visibility: visible;
+    background: black;
+    z-index: 2
 }

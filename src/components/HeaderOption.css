@@ -17,10 +17,6 @@
     width: 25px !important;
 }
 
-.rounded {
-    border-radius: 25px;
-}
-
 .headerOption__title {
     font-size: 12px;
     font-weight: 400;

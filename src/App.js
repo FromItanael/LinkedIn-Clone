@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login'
 import Home from './components/Home';
@@ -22,6 +22,7 @@ function App(props) {
             <Login />
           </Route>
           <Route path='/home'>
+            {!props.user && <Redirect to='/' />}
             <Header />
             <Home />
           </Route>

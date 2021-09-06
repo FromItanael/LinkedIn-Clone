@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 
 function Header(props) {
     return (
-
         <div className='header'>
             <div className="header__left">
                 <img src="/images/linkedin-logo.svg" alt="Logo" />
@@ -25,15 +24,44 @@ function Header(props) {
 
             <div className="header__right">
                 <HeaderOption Icon={HomeIcon} title='Home' />
+                {/* <div className='headerOption'>
+                    <props.Icon className='headerOption__icon' />
+                    <h3 className='headerOption__title'>{props.title}</h3>
+                </div > */}
                 <HeaderOption Icon={SupervisorAccountIcon} title='My Network' />
+                {/* <div className='headerOption'>
+                    <props.Icon className='headerOption__icon' />
+                    <h3 className='headerOption__title'>{props.title}</h3>
+                </div > */}
                 <HeaderOption Icon={BusinessCenterIcon} title='Jobs' />
+                {/* <div className='headerOption'>
+                    <props.Icon className='headerOption__icon' />
+                    <h3 className='headerOption__title'>{props.title}</h3>
+                </div > */}
                 <HeaderOption Icon={ChatIcon} title='Messaging' />
+                {/* <div className='headerOption'>
+                    <props.Icon className='headerOption__icon' />
+                    <h3 className='headerOption__title'>{props.title}</h3>
+                </div > */}
                 <HeaderOption Icon={NotificationsIcon} title='Notifications' />
-                <HeaderOption
+                {/* <div className='headerOption'>
+                    <props.Icon className='headerOption__icon' />
+                    <h3 className='headerOption__title'>{props.title}</h3>
+                </div > */}
+                {/* <HeaderOption
                     onClick={() => props.signOutAPI()}
                     avatar={true}
-                    title={props.user.displayName}
-                />
+                    title="Vous"
+                /> */}
+                <div
+                    onClick={() => props.signOutAPI()}
+                    className='headerOption'>
+                    {props.user && <img src={props.user.photoURL} className='headerOption__icon rounded' alt="" />}
+                    <div className="d-flex">
+                        <h3 className='headerOption__title'>Vous</h3>
+                        <img src="/images/dropdown-icon.svg" alt="" />
+                    </div>
+                </div>
             </div>
         </div>
     )

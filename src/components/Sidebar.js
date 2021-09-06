@@ -1,8 +1,9 @@
 import { Avatar } from '@material-ui/core'
 import React from 'react'
+import { connect } from 'react-redux';
 import './Sidebar.css'
 
-function Sidebar() {
+function Sidebar(props) {
 
     const recentItem = (topic) => {
         return (
@@ -17,26 +18,21 @@ function Sidebar() {
         <div className='sidebar'>
             <div className="sidebar__top">
                 <img src='https://i.pinimg.com/originals/2d/e8/82/2de882cd4f3992ada3d609e3a183f7a4.jpg' alt='' />
-                <Avatar
-                    src="/images/photo.svg"
-                    className='sidebar__avatar'
-                >
-                    Vincent
-                </Avatar>
-                <h2>Vincent Nouvian</h2>
-                <h4>vincent@gmail.fr</h4>
+                {props.user && props.user.photoURL ? <Avatar src={props.user.photoURL} alt="" /> : <img src="/images/photo.svg" alt="" />}
+                <h2>{props.user.displayName}</h2>
+                <h4>Developpeur Web chez ISAGRI</h4>
             </div>
             <div className="sidebar__stats">
                 <div className="sidebar__stat">
-                    <p>Who viewed you</p>
+                    <p>Vues de votre profil</p>
                     <p className="sidebar__statNumber">
-                        2,543
+                        126
                     </p>
                 </div>
                 <div className="sidebar__stat">
-                    <p>Views on post</p>
+                    <p>Vues de votre post</p>
                     <p className="sidebar__statNumber">
-                        2,410
+                        424
                     </p>
                 </div>
             </div>
@@ -52,4 +48,11 @@ function Sidebar() {
     )
 }
 
-export default Sidebar
+const mapStateToProps = (state) => {
+    return {
+        user: state.userState.user,
+    }
+}
+
+
+export default connect(mapStateToProps)(Sidebar)

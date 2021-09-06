@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react'
 import './Feed.css';
 import CreateIcon from '@material-ui/icons/Create'
 import InputOption from './InputOption';
-import ImageIcon from '@material-ui/icons/Image';
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
-import EventNoteIcon from '@material-ui/icons/EventNote';
-import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import Article from './Article';
 import { connect } from 'react-redux';
 import { Avatar } from '@material-ui/core';
@@ -54,10 +50,22 @@ function Feed(props) {
                         </div>
                     </div>
                     <div className="feed__InputOptions">
-                        <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" />
-                        <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" />
-                        <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" />
-                        <InputOption Icon={CalendarViewDayIcon} title="Write article" color="#7FC15E" />
+                        <div className="inputOption">
+                            <img src="/images/image-icon.svg" alt="" />
+                            <h4>Photo</h4>
+                        </div>
+                        <div className="inputOption">
+                            <img src="/images/video-icon.svg" alt="" />
+                            <h4>Vidéo</h4>
+                        </div>
+                        <div className="inputOption">
+                            <img src="/images/calendar-icon.svg" alt="" />
+                            <h4>Événement</h4>
+                        </div>
+                        <div className="inputOption">
+                            <img src="/images/content-left-align-icon.svg" alt="" />
+                            <h4>Rédiger un article</h4>
+                        </div>
                     </div>
                     <PostModal showModal={showModal} closeModal={handleClick} />
                 </div>

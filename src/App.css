@@ -1,0 +1,7 @@
+.d-flex {
+    display: flex;
+}
+
+.rounded {
+    border-radius: 25px;
+}

@@ -12,7 +12,7 @@ const Article = ({ article }) => {
     }
 
     const handleClearBox = () => {
-        setShowBox(false)
+        setTimeout(() => { setShowBox(false) }, 1500);
     }
 
     return (

@@ -133,16 +133,18 @@
         transform: scale(1.35) translateY(-28%)
     }
 }
+
 .reactions-menu__reaction .reactions-menu__icon {
     transform: translateY(0);
     transition: transform 0.5s;
 }
-/* .reactions-menu__icon:not(:hover) {
-    transform: scale(.9) ease-in-out .5s;
+
+.likeOptions:hover .reactions-menu__reaction:not(:hover) .reactions-menu__icon {
+    transform: scale(.9);
     transition: transform 300ms;
 }
 
-*/
+
 .likeOptions .reactions-menu__reaction:nth-of-type(2) img {
     animation-delay: 50ms
 }

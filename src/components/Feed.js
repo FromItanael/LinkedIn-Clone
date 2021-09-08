@@ -80,7 +80,6 @@ function Feed(props) {
                             <Article key={key}
                                 article={article}
                             />
-
                         ))}
                     </>
                 }

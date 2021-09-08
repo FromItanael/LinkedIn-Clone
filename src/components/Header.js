@@ -29,35 +29,30 @@ function Header(props) {
                 <nav className="header__right">
                     <HeaderOptions>
                         <li className="global-nav__item">
-                            {/* <HeaderOption Icon={HomeIcon} title='Home' /> */}
                             <NavLink >
                                 <HomeIcon className='headerOption__icon' />
                                 <h3 className='headerOption__title'>Accueil</h3>
                             </NavLink >
                         </li>
                         <li className="global-nav__item">
-                            {/* <HeaderOption Icon={SupervisorAccountIcon} title='My Network' /> */}
                             <NavLink>
                                 <SupervisorAccountIcon className='headerOption__icon' />
                                 <h3 className='headerOption__title'>Réseau</h3>
                             </NavLink >
                         </li>
                         <li className="global-nav__item">
-                            {/* <HeaderOption Icon={BusinessCenterIcon} title='Jobs' /> */}
                             <NavLink>
                                 <BusinessCenterIcon className='headerOption__icon' />
                                 <h3 className='headerOption__title'>Emplois</h3>
                             </NavLink >
                         </li>
                         <li className="global-nav__item">
-                            {/* <HeaderOption Icon={ChatIcon} title='Messaging' /> */}
                             <NavLink>
                                 <ChatIcon className='headerOption__icon' />
                                 <h3 className='headerOption__title'>Messagerie</h3>
                             </NavLink >
                         </li>
                         <li className="global-nav__item">
-                            {/* <HeaderOption Icon={NotificationsIcon} title='Notifications' /> */}
                             <NavLink>
                                 <NotificationsIcon className='headerOption__icon' />
                                 <h3 className='headerOption__title'>Notifications</h3>
@@ -86,7 +81,7 @@ function Header(props) {
                         <li className="global-nav__item">
                             <NavLink className="headerOption__divider">
                                 <div className="d-flex">
-                                    <h3 className='headerOption__title spotlight'>Essayer Premium gratuitement</h3>
+                                    <h3 className='headerOption__title spotlight'>Essayez Premium gratuitement</h3>
                                 </div>
                             </NavLink>
                         </li>
@@ -119,6 +114,9 @@ min-height: 52px;
 min-width: 80px;
 position: relative;
 text-decoration: none;
+    &:hover{
+        color: rgba(0,0,0,0.9)
+    }
 `
 
 const mapStateToProps = (state) => {
